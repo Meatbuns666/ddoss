@@ -1,0 +1,2 @@
+npm install url fs http2 http tls net request cluster fake-useragent randomstring
+node main.js https://oai.oeo.asia/ 60 5000 128000 proxy.txt
