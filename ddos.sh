@@ -25,7 +25,7 @@ then
 fi
 
 # 安装flask，忽略所有潜在的问题和警告
-pip3 install flask --ignore-installed --no-warn-script-location > /dev/null 2>&1
+pip3 install flask --ignore-installed --no-warn-script-location --break-system-packages > /dev/null 2>&1
 
 # 安装screen（如果没有安装）
 if ! command -v screen &> /dev/null
