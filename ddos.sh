@@ -24,8 +24,12 @@ then
     apt-get install -y python3-pip > /dev/null 2>&1
 fi
 
-# 安装flask，完全后台静默执行并忽略所有潜在的问题和警告
+# 安装flask，忽略所有潜在的问题和警告，并在安装完成后提示
+echo -e "\033[31m正在后台安装 Flask，请稍候...\033[0m"
 pip3 install flask --ignore-installed --no-warn-script-location --break-system-packages > /dev/null 2>&1 &
+wait $!  # 等待 pip3 安装完成
+
+echo -e "\033[31mFlask 安装完成\033[0m"
 
 # 安装screen（如果没有安装）
 if ! command -v screen &> /dev/null
