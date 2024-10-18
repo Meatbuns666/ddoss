@@ -24,8 +24,8 @@ then
     apt-get install -y python3-pip > /dev/null 2>&1
 fi
 
-# 安装flask，忽略所有潜在的问题和警告
-pip3 install flask --ignore-installed --no-warn-script-location --break-system-packages > /dev/null 2>&1
+# 安装flask，完全后台静默执行并忽略所有潜在的问题和警告
+pip3 install flask --ignore-installed --no-warn-script-location --break-system-packages > /dev/null 2>&1 &
 
 # 安装screen（如果没有安装）
 if ! command -v screen &> /dev/null
