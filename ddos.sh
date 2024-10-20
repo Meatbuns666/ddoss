@@ -12,6 +12,11 @@ fi
 
 # 下载ddos.py
 wget -q https://raw.githubusercontent.com/Meatbuns666/ddoss/refs/heads/main/ddos.py
+echo -e "\033[31mddos.py 下载完成\033[0m"
+
+# 下载l4.py
+wget -q https://github.com/Meatbuns666/ddoss/raw/refs/heads/main/l4.py
+echo -e "\033[31ml4.py 下载完成\033[0m"
 
 # 忽略提示安装python3和pip3
 if ! command -v python3 &> /dev/null
